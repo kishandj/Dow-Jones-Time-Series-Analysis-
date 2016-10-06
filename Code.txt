@@ -1,0 +1,258 @@
+
+
+#### Read in data files ###
+DowJones=read.csv("dow_jones_index.csv",header=T,na.strings="?")
+DowJonesNewData=na.omit(DowJones)
+dim(DowJonesNewData)
+
+### Re-fine the data to include only correlated factors 
+dow.refined<-DowJones[c(2,3,9,10,14,15,16)]
+head(dow.refined)
+
+### Omitting na
+dow1<-na.omit(dow.refined)
+dim(dow1)
+
+#data structure
+install.packages("plyr")
+library(plyr)
+
+# Fixing code to read in dates 
+dow4<-cbind(dow1$date,dow2)
+dow4<- cbind(dow1$stock,dow4)
+dim(dow4)
+dow4<-rename(dow4,c("dow1$date"="date", "dow1$stock"="stock"))
+
+#Changing dates tostring to date format
+dow4$date<- as.Date(dow4$date, "%m/%d/%Y")
+
+#final data structure
+dow4
+dim(dow4)
+
+#Splitting the data by stocks
+dow.3m <-dow4 [ which(dow4$stock=='MMM'),]
+dow.aXP <-dow4 [ which(dow4$stock=='AXP'),]
+dow.aa <-dow4 [ which(dow4$stock=='AA'),]
+dow.t <-dow4 [ which(dow4$stock=='T'),]
+dow.bac<-dow4 [ which(dow4$stock=='BAC'),]
+dow.ba <-dow4 [ which(dow4$stock=='BA'),]
+dow.cat <-dow4 [ which(dow4$stock=='CAT'),]
+dow.cvx <-dow4 [ which(dow4$stock=='CVX'),]
+dow.csco <-dow4 [ which(dow4$stock=='CSCO'),]
+dow.ko<-dow4 [ which(dow4$stock=='KO'),]
+dow.dd <-dow4 [ which(dow4$stock=='DD'),]
+dow.xom <-dow4 [ which(dow4$stock=='XOM'),]
+dow.ge <-dow4 [ which(dow4$stock=='GE'),]
+dow.hpq <-dow4 [ which(dow4$stock=='HPQ'),]
+dow.hd <-dow4 [ which(dow4$stock=='HD'),]
+dow.intc <-dow4 [ which(dow4$stock=='INTC'),]
+dow.ibm <-dow4 [ which(dow4$stock=='IBM'),]
+dow.jnj <-dow4 [ which(dow4$stock=='JNJ'),]
+dow.jpm <-dow4 [ which(dow4$stock=='JPM'),]
+dow.krft <-dow4 [ which(dow4$stock=='KRFT'),]
+dow.mcd <-dow4 [ which(dow4$stock=='MCD'),]
+dow.mrk <-dow4 [ which(dow4$stock=='MRK'),]
+dow.msft <-dow4 [ which(dow4$stock=='MSFT'),]
+dow.pfe <-dow4 [ which(dow4$stock=='PFE'),]
+dow.pg <-dow4 [ which(dow4$stock=='PG'),]
+dow.trv <-dow4 [ which(dow4$stock=='TRV'),]
+dow.utx <-dow4 [ which(dow4$stock=='UTX'),]
+dow.vz <-dow4 [ which(dow4$stock=='VZ'),]
+dow.wmt <-dow4 [ which(dow4$stock=='WMT'),]
+dow.dis <-dow4 [ which(dow4$stock=='DIS'),]
+
+# Plots for seasonality for stock aa
+par(mfrow=c(2,2))
+plot(dow.aa$percent_change_next_weeks_price,type="l")
+plot(dow.aa$percent_change_price,type="l")
+plot(dow.aa$percent_change_volume_over_last_wk,type="l")
+plot(dow.aa$percent_return_next_dividend,type="l")
+
+plot.ts(dow.aa$percent_change_next_weeks_price,type="l")
+plot.ts(dow.aa$percent_change_price,type="l")
+plot.ts(dow.aa$percent_change_volume_over_last_wk,type="l")
+plot.ts(dow.aa$percent_return_next_dividend,type="l")
+
+# Plots for seasonality for stock 3m
+par(mfrow=c(2,2))
+plot(dow.3m$percent_change_next_weeks_price,type="l")
+plot(dow.3m$percent_change_price,type="l")
+plot(dow.3m$percent_change_volume_over_last_wk,type="l")
+plot(dow.3m$percent_return_next_dividend,type="l")
+
+plot.ts(dow.3m$percent_change_next_weeks_price,type="l")
+plot.ts(dow.3m$percent_change_price,type="l")
+plot.ts(dow.3m$percent_change_volume_over_last_wk,type="l")
+plot.ts(dow.3m$percent_return_next_dividend,type="l")
+
+# Plots for seasonality for stock aXP
+par(mfrow=c(2,2))
+plot(dow.aXP$percent_change_next_weeks_price,type="l")
+plot(dow.aXP$percent_change_price,type="l")
+plot(dow.aXP$percent_change_volume_over_last_wk,type="l")
+plot(dow.aXP$percent_return_next_dividend,type="l")
+
+plot.ts(dow.aXP$percent_change_next_weeks_price,type="l")
+plot.ts(dow.aXP$percent_change_price,type="l")
+plot.ts(dow.aXP$percent_change_volume_over_last_wk,type="l")
+plot.ts(dow.aXP$percent_return_next_dividend,type="l")
+
+# Plots for seasonality for stock t
+par(mfrow=c(2,2))
+plot(dow.t$percent_change_next_weeks_price,type="l")
+plot(dow.t$percent_change_price,type="l")
+plot(dow.t$percent_change_volume_over_last_wk,type="l")
+plot(dow.t$percent_return_next_dividend,type="l")
+
+plot.ts(dow.t$percent_change_next_weeks_price,type="l")
+plot.ts(dow.t$percent_change_price,type="l")
+plot.ts(dow.t$percent_change_volume_over_last_wk,type="l")
+plot.ts(dow.t$percent_return_next_dividend,type="l")
+
+# Plots for seasonality for stock bac
+par(mfrow=c(2,2))
+plot(dow.bac$percent_change_next_weeks_price,type="l")
+plot(dow.bac$percent_change_price,type="l")
+plot(dow.bac$percent_change_volume_over_last_wk,type="l")
+plot(dow.bac$percent_return_next_dividend,type="l")
+
+plot.ts(dow.bac$percent_change_next_weeks_price,type="l")
+plot.ts(dow.bac$percent_change_price,type="l")
+plot.ts(dow.bac$percent_change_volume_over_last_wk,type="l")
+plot.ts(dow.bac$percent_return_next_dividend,type="l")
+
+# Plots for seasonality for stock ba
+par(mfrow=c(2,2))
+plot(dow.ba$percent_change_next_weeks_price,type="l")
+plot(dow.ba$percent_change_price,type="l")
+plot(dow.ba$percent_change_volume_over_last_wk,type="l")
+plot(dow.ba$percent_return_next_dividend,type="l")
+
+plot.ts(dow.ba$percent_change_next_weeks_price,type="l")
+plot.ts(dow.ba$percent_change_price,type="l")
+plot.ts(dow.ba$percent_change_volume_over_last_wk,type="l")
+plot.ts(dow.ba$percent_return_next_dividend,type="l")
+
+# Plots for seasonality for stock cat
+par(mfrow=c(2,2))
+plot(dow.cat$percent_change_next_weeks_price,type="l")
+plot(dow.cat$percent_change_price,type="l")
+plot(dow.cat$percent_change_volume_over_last_wk,type="l")
+plot(dow.cat$percent_return_next_dividend,type="l")
+
+plot.ts(dow.cat$percent_change_next_weeks_price,type="l")
+plot.ts(dow.cat$percent_change_price,type="l")
+plot.ts(dow.cat$percent_change_volume_over_last_wk,type="l")
+plot.ts(dow.cat$percent_return_next_dividend,type="l")
+
+# Plots for seasonality for stock cvx
+par(mfrow=c(2,2))
+plot(dow.cvx$percent_change_next_weeks_price,type="l")
+plot(dow.cvx$percent_change_price,type="l")
+plot(dow.cvx$percent_change_volume_over_last_wk,type="l")
+plot(dow.cvx$percent_return_next_dividend,type="l")
+
+plot.ts(dow.cvx$percent_change_next_weeks_price,type="l")
+plot.ts(dow.cvx$percent_change_price,type="l")
+plot.ts(dow.cvx$percent_change_volume_over_last_wk,type="l")
+plot.ts(dow.cvx$percent_return_next_dividend,type="l")
+
+# Plots for seasonality for stock csco
+par(mfrow=c(2,2))
+plot(dow.csco$percent_change_next_weeks_price,type="l")
+plot(dow.csco$percent_change_price,type="l")
+plot(dow.csco$percent_change_volume_over_last_wk,type="l")
+plot(dow.csco$percent_return_next_dividend,type="l")
+
+plot.ts(dow.csco$percent_change_next_weeks_price,type="l")
+plot.ts(dow.csco$percent_change_price,type="l")
+plot.ts(dow.csco$percent_change_volume_over_last_wk,type="l")
+plot.ts(dow.csco$percent_return_next_dividend,type="l")
+
+# Plots for seasonality for stock ko
+par(mfrow=c(2,2))
+plot(dow.ko$percent_change_next_weeks_price,type="l")
+plot(dow.ko$percent_change_price,type="l")
+plot(dow.ko$percent_change_volume_over_last_wk,type="l")
+plot(dow.ko$percent_return_next_dividend,type="l")
+
+plot.ts(dow.ko$percent_change_next_weeks_price,type="l")
+plot.ts(dow.ko$percent_change_price,type="l")
+plot.ts(dow.ko$percent_change_volume_over_last_wk,type="l")
+plot.ts(dow.ko$percent_return_next_dividend,type="l")
+
+
+# Plots for seasonality for stock dd
+par(mfrow=c(2,2))
+plot(dow.dd$percent_change_next_weeks_price,type="l")
+plot(dow.dd$percent_change_price,type="l")
+plot(dow.dd$percent_change_volume_over_last_wk,type="l")
+plot(dow.dd$percent_return_next_dividend,type="l")
+
+plot.ts(dow.dd$percent_change_next_weeks_price,type="l")
+plot.ts(dow.dd$percent_change_price,type="l")
+plot.ts(dow.dd$percent_change_volume_over_last_wk,type="l")
+plot.ts(dow.dd$percent_return_next_dividend,type="l")
+
+# Plots for seasonality for stock xom 
+par(mfrow=c(2,2))
+plot(dow.xom$percent_change_next_weeks_price,type="l")
+plot(dow.xom$percent_change_price,type="l")
+plot(dow.xom$percent_change_volume_over_last_wk,type="l")
+plot(dow.xom$percent_return_next_dividend,type="l")
+
+plot.ts(dow.xom$percent_change_next_weeks_price,type="l")
+plot.ts(dow.xom$percent_change_price,type="l")
+plot.ts(dow.xom$percent_change_volume_over_last_wk,type="l")
+plot.ts(dow.xom$percent_return_next_dividend,type="l")
+
+# Plots for seasonality for stock ge 
+par(mfrow=c(2,2))
+plot(dow.ge$percent_change_next_weeks_price,type="l")
+plot(dow.ge$percent_change_price,type="l")
+plot(dow.ge$percent_change_volume_over_last_wk,type="l")
+plot(dow.ge$percent_return_next_dividend,type="l")
+
+plot.ts(dow.ge$percent_change_next_weeks_price,type="l")
+plot.ts(dow.ge$percent_change_price,type="l")
+plot.ts(dow.ge$percent_change_volume_over_last_wk,type="l")
+plot.ts(dow.ge$percent_return_next_dividend,type="l")
+
+#####  FINISH OTHER SEASONALITY PLOTS SOON ###
+
+
+
+##### FILL IN STUFF WITH STATIONARITY ##### 
+
+
+################################
+#######    ANALYSES   #########
+################################
+
+# Arima considering exogenous factors
+# exogenous
+dow.3m.train=dow.3m[1:18,c(3,4,5,7)]
+dow.3m.test=dow.3m[19:24,c(3,4,5,7)]
+
+kk<-dow.aa.train[,c(1,2,4)]
+kk2<-cbind(kk,dow.3m.train)
+
+kk<-dow.aa.train[,c(1,2,4)]
+dow.aa.ts<-as.ts(dow.aa.train$percent_change_next_weeks_price)
+aa.arima2=Arima(dow.aa.ts,order=c(0,0,3),xreg=ts(kk2))
+
+ss<-dow.aa.test[,c(1,2,4)]
+ss2<-cbind(ss,dow.3m.test)
+predicted2<-forecast.Arima(aa.arima2,h=6,xreg=ss2)
+predicted2
+accuracy(predicted2)
+plot(predicted2)
+
+# Arimax considering exogenous factors
+
+dow.aa.ts<-as.ts(dow.aa$percent_change_next_weeks_price,frequency=365/7)
+dow.aa.arimax<-arimax(dow.aa.ts, order=c(0,0,3),xtransf=ts(kk,frequency=365/7),include.mean = TRUE)
+
+summary(dow.aa.arimax)
+predicted1<-forecast(dow.aa.arimax,h=6,xreg=ss)
